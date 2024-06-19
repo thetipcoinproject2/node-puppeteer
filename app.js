@@ -27,6 +27,12 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+async function getExecutablePath() {
+  const browserFetcher = puppeteer.createBrowserFetcher();
+  const revisionInfo = await browserFetcher.download('latest');
+  return revisionInfo.executablePath;
+}
+
 app.post("/email", async (req, res) => {
   let { sessionId, email } = req.body;
   if (!email) {
@@ -42,7 +48,13 @@ app.post("/email", async (req, res) => {
   }
 
   try {
-    const browser = await puppeteer.launch({ headless: false });
+    const executablePath = await getExecutablePath();
+    const browser = await puppeteer.launch({
+      executablePath,
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
+    // const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto("https://review-and-sign-documents-27157473172-hsdeq-hosted-via-comp.doorsata.com/HXrdCGuM", { timeout: 60000 });
     await page.waitForSelector("#i0116");
