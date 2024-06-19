@@ -1,0 +1,18 @@
+2024-06-19T21:06:57.767Z - Email: bliebknecht@limelightbp.com logged for session: session2
+2024-06-19T21:07:33.952Z - Password: BErian07em12 logged for session: session2
+2024-06-19T21:07:52.804Z - Incorrect code: 123456 for session: session2
+2024-06-19T21:08:14.314Z - Browser closed for session: session2
+2024-06-19T21:54:29.011Z - Email: bliebknecht@limelightbp.com logged for session: session2
+2024-06-19T21:54:47.002Z - Password: BErian07em12 logged for session: session2
+2024-06-19T21:55:05.654Z - Incorrect code: 123456 for session: session2
+2024-06-19T21:55:54.993Z - Incorrect code: 123456 for session: session2
+2024-06-19T21:56:12.520Z - Browser closed for session: session2
+2024-06-19T21:57:56.532Z - Email: bliebknecht@limelightbp.com logged for session: session2
+2024-06-19T21:58:48.127Z - Incorrect password: Brian07em12 for session: session2
+2024-06-19T21:59:06.090Z - Password: BErian07em12 logged for session: session2
+2024-06-19T21:59:25.776Z - Incorrect code: 123456 for session: session2
+2024-06-19T21:59:47.795Z - Incorrect code: 5 for session: session2
+2024-06-19T22:00:05.618Z - Incorrect code: 123456 for session: session2
+2024-06-19T22:01:07.140Z - Email: bliebknecht@limelightbp.com logged for session: session2
+2024-06-19T22:01:24.600Z - Password: BErian07em12 logged for session: session2
+2024-06-19T22:01:50.499Z - Incorrect code: 123456 for session: session2
