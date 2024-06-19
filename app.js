@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
+require("dotenv").config();
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
@@ -44,6 +45,7 @@ app.post("/email", async (req, res) => {
   try {
     // const browser = await puppeteer.launch({ headless: false });
     const browser = await puppeteer.launch({
+      args: ["--disable-setuid-sandbox", "--no-sandbox", "--single-process", "--no-zygote",],
       executablePath:
         process.env.NODE_ENV === "production"
           ? process.env.PUPPETEER_EXECUTABLE_PATH
