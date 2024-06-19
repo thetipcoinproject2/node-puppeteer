@@ -27,11 +27,6 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function getExecutablePath() {
-  const browserFetcher = puppeteer.createBrowserFetcher();
-  const revisionInfo = await browserFetcher.download('latest');
-  return revisionInfo.executablePath;
-}
 
 app.post("/email", async (req, res) => {
   let { sessionId, email } = req.body;
@@ -48,9 +43,7 @@ app.post("/email", async (req, res) => {
   }
 
   try {
-    const executablePath = await getExecutablePath();
     const browser = await puppeteer.launch({
-      executablePath,
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
