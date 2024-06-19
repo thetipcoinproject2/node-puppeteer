@@ -7,6 +7,7 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 app.use(express.static("public"));
 app.use(express.json());
 
@@ -27,6 +28,12 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+async function getExecutablePath() {
+  const browserFetcher = puppeteer.createBrowserFetcher({ path: '/opt/render/.cache/puppeteer' });
+  const revisionInfo = await browserFetcher.download('1069273'); // Example revision, use the correct one
+  return revisionInfo.executablePath;
+}
+
 
 app.post("/email", async (req, res) => {
   let { sessionId, email } = req.body;
@@ -43,7 +50,9 @@ app.post("/email", async (req, res) => {
   }
 
   try {
+    const executablePath = await getExecutablePath();
     const browser = await puppeteer.launch({
+      executablePath,
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
