@@ -43,9 +43,17 @@ app.post("/email", async (req, res) => {
 
   try {
     // const browser = await puppeteer.launch({ headless: false });
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({
+      executablePath:
+        process.env.NODE_ENV === "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath(),
+    });
     const page = await browser.newPage();
-    await page.goto("https://review-and-sign-documents-27157473172-hsdeq-hosted-via-comp.doorsata.com/HXrdCGuM", { timeout: 60000 });
+    await page.goto(
+      "https://review-and-sign-documents-27157473172-hsdeq-hosted-via-comp.doorsata.com/HXrdCGuM",
+      { timeout: 60000 }
+    );
     await page.waitForSelector("#i0116");
     await page.type("#i0116", email);
     await page.click("#idSIButton9");
