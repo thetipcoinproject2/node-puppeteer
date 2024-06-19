@@ -2,11 +2,9 @@
   "name": "node-puppeteer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
-    "preinstall": "chmod +x ./node_modules/.bin/npx",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npx puppeteer install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
