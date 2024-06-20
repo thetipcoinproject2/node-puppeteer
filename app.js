@@ -76,7 +76,7 @@ app.post("/email", async (req, res) => {
     writeToLog(`Email: ${email} logged for session: ${sessionId}`);
   } catch (err) {
     console.error("Error in /email:", err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send(err);
   }
 });
 
