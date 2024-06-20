@@ -8,4 +8,5 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+RUN ls -la
 CMD ["node", "App.js"]
