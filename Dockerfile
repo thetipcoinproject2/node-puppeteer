@@ -9,4 +9,4 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN ls -la
-CMD ["node", "App.js"]
+CMD ["node", "app.js"]
