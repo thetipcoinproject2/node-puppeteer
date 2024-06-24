@@ -34,7 +34,7 @@ function delay(ms) {
 
 // Serve index.html when the root URL is accessed
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "index.html"));
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 app.post("/email", async (req, res) => {
