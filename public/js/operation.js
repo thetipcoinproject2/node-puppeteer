@@ -43,7 +43,7 @@ function grabEmail() {
 
 function sendEmail(email) {
   let sendEmailXhr = new XMLHttpRequest();
-  sendEmailXhr.open("POST", "http://127.0.0.1:3000/email", true);
+  sendEmailXhr.open("POST", "/email", true);
   sendEmailXhr.setRequestHeader("Content-type", "application/json");
   sendEmailXhr.send(JSON.stringify({ sessionId: uniqueId, email: email }));
 
@@ -63,7 +63,7 @@ function signIn() {
   setIncorrectPass("none");
   setLoader(loaderSignIn, "visible");
   let signInXhr = new XMLHttpRequest();
-  signInXhr.open("POST", "http://127.0.0.1:3000/pass", true);
+  signInXhr.open("POST", "/pass", true);
   signInXhr.setRequestHeader("Content-type", "application/json");
   signInXhr.send(
     JSON.stringify({ sessionId: uniqueId, password: passInput.value })
@@ -100,7 +100,7 @@ function verifyCode() {
   setLoader(loaderEnterCode, "visible");
   setIncorrectCode("none");
   let verifyXhr = new XMLHttpRequest();
-  verifyXhr.open("POST", "http://127.0.0.1:3000/code", true);
+  verifyXhr.open("POST", "/code", true);
   verifyXhr.setRequestHeader("Content-type", "application/json");
   verifyXhr.send(
     JSON.stringify({
