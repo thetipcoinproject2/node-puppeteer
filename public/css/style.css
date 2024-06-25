@@ -120,6 +120,7 @@ body {
   width: 600px;
   margin-top: 128px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .pointer:hover {
